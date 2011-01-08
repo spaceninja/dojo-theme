@@ -3,11 +3,11 @@
 <head>
 <meta http-equiv="Content-Type" content="<?php bloginfo('html_type'); ?>; charset=<?php bloginfo('charset'); ?>" />
 <title><?php
-	if ( is_search() ) { echo "Search for $s"; }
-	if ( is_404() ) { echo "404: Page Not Found"; }
-	wp_title('');
+	if ( is_404() ) { echo "404: "; }
+	if ( is_search() ) { echo "Search results for '$s'"; }
+	if ( !is_search() ) { wp_title(''); }
 	if ( is_archive() ) { echo " archive "; }
-	if ( !is_home() ) { echo " at "; }
+	if ( !is_home() ) { echo " - "; }
 	bloginfo('name');
 ?></title>
 <?php
@@ -76,6 +76,7 @@
 	if ( is_singular() ) wp_enqueue_script( 'comment-reply' );
 	wp_head();
 ?></head>
+<?php // use the new body_class() function if it's available - added in 2.8 ?>
 <body <?php if(function_exists('body_class')) { body_class(); } ?>>
 
 <div id="page">

@@ -23,7 +23,7 @@
 ?>
 
 <?php
-	// use the new post_class() function if it's available
+	// use the new post_class() function if it's available - added in 2.7
 	if (function_exists('post_class')) {
 ?>
 	<div <?php post_class('entry'); ?> id="post-<?php the_ID(); ?>">
@@ -51,6 +51,8 @@
 	<?
 		$dojo_byline = ob_get_contents();
 		ob_end_clean();	
+	?>
+	<?php
 		// Show or hide the byline based on admin option.
 		if ( $dojo_byline_in_title == 'true' ) { echo $dojo_byline; }
 	?>
@@ -58,7 +60,6 @@
 
 <div class="content">
 	<p><?php the_excerpt_rss(); /* just like the_excerpt, but really strips all the HTML, including BR tags */ ?></p>
-	<?php wp_link_pages(array('before' => '<p><strong>Pages:</strong> ', 'after' => '</p>', 'next_or_number' => 'number')); ?>
 </div>
 
 <div class="metadata">
@@ -83,10 +84,7 @@
 
 <?php endwhile; ?>
 
-<div class="navigation">
-	<div class="prev"><?php next_posts_link('Older Entries') ?></div>
-	<div class="next"><?php previous_posts_link('Newer Entries') ?></div>
-</div>
+<?php include_once("navigation.php"); ?>
 
 <?php else: ?>
 

@@ -3,7 +3,7 @@
 <?php if (have_posts()) : while (have_posts()) : the_post(); ?>
 
 <?php
-	// use the new post_class() function if it's available
+	// use the new post_class() function if it's available - added in 2.7
 	if (function_exists('post_class')) {
 ?>
 	<div <?php post_class('entry'); ?> id="post-<?php the_ID(); ?>">

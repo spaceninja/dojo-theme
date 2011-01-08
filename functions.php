@@ -1,22 +1,28 @@
 <?php
 if ( function_exists('register_sidebar') ) {
-	// have to register the sidebars separately so I can name them uniquely - SV
+	// register the sidebars separately so they can have unique IDs
 	register_sidebar( array(
-		'name' => 'column1',
+		'id' => 'column1',
+		'name' => 'Left Sidebar',
+		'description' => 'The left-hand sidebar.',
 		'before_widget' => '<div id="%1$s" class="widget %2$s">',
 		'after_widget' => '</div><!-- end widget -->',
 		'before_title' => '<h4>',
 		'after_title' => '</h4>',
 	));
 	register_sidebar( array(
-		'name' => 'column2',
+		'id' => 'column2',
+		'name' => 'Right Sidebar',
+		'description' => 'The right-hand sidebar.',
 		'before_widget' => '<div id="%1$s" class="widget %2$s">',
 		'after_widget' => '</div><!-- end widget -->',
 		'before_title' => '<h4>',
 		'after_title' => '</h4>',
 	));
 	register_sidebar( array(
-		'name' => 'columncap',
+		'id' => 'columncap',
+		'name' => 'Sidebar Cap',
+		'description' => 'A wider area that sits on top of the left and right sidebars. Useful for an "about" paragraph.',
 		'before_widget' => '<div id="%1$s" class="widget %2$s">',
 		'after_widget' => '</div><!-- end widget -->',
 		'before_title' => '<h4>',
@@ -24,14 +30,13 @@ if ( function_exists('register_sidebar') ) {
 	));
 }
 
-// Display the links to the extra feeds such as category feeds
+// Remove unwanted links from the header
 remove_action( 'wp_head', 'feed_links_extra', 3 );
-
-// Display the links to the general feeds: Post and Comment Feed
 remove_action( 'wp_head', 'feed_links', 2 );
 
 /*
 	Custom Threaded Comments code to be used with wp_list_comments
+	wp_list_comments added in 2.7
 */
 function dojo_comments($comment, $args, $depth) {
 	$GLOBALS['comment'] = $comment; ?>
@@ -94,11 +99,11 @@ function widget_dojo_dashboard_recent_comments( $args ) {
 	}
 	echo "$after_widget\n";
 }
-if ( function_exists('register_sidebar_widget') )
-	register_sidebar_widget('Admin Recent Comments (dojo version)', 'widget_dojo_dashboard_recent_comments');
+register_sidebar_widget('Admin Recent Comments (dojo version)', 'widget_dojo_dashboard_recent_comments');
 
 /*
 	Bryan's Latest Comments Widget v1.5.8
+	This plugin doesn't provide a widget, so we're providing one.
 */
 if (function_exists('blc_latest_comments')) {
 	function widget_dojo_blc_latest_comments( $args ) {
@@ -108,35 +113,31 @@ if (function_exists('blc_latest_comments')) {
 		echo "<ul>" . blc_latest_comments('5', '5', true, '<li>', '</li>', false) . "</ul>\n";
 		echo "$after_widget\n";
 	}
-	if ( function_exists('register_sidebar_widget') )
-		register_sidebar_widget('Bryan\'s Latest Comments (dojo version)', 'widget_dojo_blc_latest_comments');
+	register_sidebar_widget('Bryan\'s Latest Comments (dojo version)', 'widget_dojo_blc_latest_comments');
 }
 
 /*
-	FlickrRSS Widget v4.0
-	These settings overrule the ones set in the admin area.
+	FlickrRSS Widget v5.1
+	Uses square images wrapped in LI tags for easier theming
 */
 if (function_exists('get_flickrRSS')) {
 	function widget_dojo_flickrRSS( $args ) {
 		extract( $args );
 		echo "\n$before_widget\n";
 		echo $before_title . "Recent Photos" . $after_title . "\n";
-		// load the options from the database so we can specify proper markup
-		$flickrRSS_display_numitems = get_option('flickrRSS_display_numitems');
-		$flickrRSS_display_type = get_option('flickrRSS_display_type');
-		$flickrRSS_tags = get_option('flickrRSS_tags');
-		$flickrRSS_display_imagesize = get_option('flickrRSS_display_imagesize');
 		echo "<ul>";
-		get_flickrRSS($flickrRSS_display_numitems, $flickrRSS_display_type, $flickrRSS_tags, $flickrRSS_display_imagesize, '<li>', '</li>');
+		$flickrRSS_settings = array(
+			'html' => '<li><a href="%flickr_page%"><img src="%image_square%" alt="%title%"/></a></li>'
+		);
+		get_flickrRSS( $flickrRSS_settings );
 		echo "</ul>\n";
 		echo "$after_widget\n";
 	}
-	if ( function_exists('register_sidebar_widget') )
-		register_sidebar_widget('Flickr RSS (dojo version)', 'widget_dojo_flickrRSS');
+	register_sidebar_widget('Flickr RSS (dojo version)', 'widget_dojo_flickrRSS');
 }
 
 /*
-	Subscribe Widget
+	Dojo Subscribe Widget
 	Uses atom feeds - to use RSS2, just change 'atom' to 'rss2'.
 */
 function widget_dojo_subscribe( $args ) {
@@ -186,8 +187,7 @@ function widget_dojo_subscribe( $args ) {
 		</ul>
 	<?php echo "$after_widget\n";
 }
-if ( function_exists('register_sidebar_widget') )
-	register_sidebar_widget('Subscribe (dojo)', 'widget_dojo_subscribe');
+register_sidebar_widget('Subscribe (dojo)', 'widget_dojo_subscribe');
 
 /*
 	Add Dojo Theme Admin Page

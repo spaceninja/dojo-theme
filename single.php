@@ -18,7 +18,7 @@
 ?>
 
 <?php
-	// use the new post_class() function if it's available
+	// use the new post_class() function if it's available - added in 2.7
 	if (function_exists('post_class')) {
 ?>
 	<div <?php post_class('entry'); ?> id="post-<?php the_ID(); ?>">
@@ -46,6 +46,8 @@
 	<?
 		$dojo_byline = ob_get_contents();
 		ob_end_clean();	
+	?>
+	<?php
 		// Show or hide the byline based on admin option.
 		if ( $dojo_byline_in_title == 'true' ) { echo $dojo_byline; }
 	?>
@@ -84,10 +86,7 @@
 	</div>
 <?php } ?>
 
-<div class="navigation">
-	<?php previous_post_link('<div class="prev"><small>Previously:</small> %link</div>') ?>
-	<?php next_post_link('<div class="next"><small>Next:</small> %link</div>') ?>
-</div>
+<?php include_once("navigation.php"); ?>
 
 <?php endwhile; else: ?>
 

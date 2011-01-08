@@ -2,10 +2,12 @@
 Theme Name: Dojo
 Theme URI: http://spaceninja.com/dojo/
 Description: A minimal, web-standards, SEO-friendly theme with two dynamic sidebars and an editable "about" blurb.
-Version: 5.1.3
+Version: 5.1.4
 Author: Scott Vandehey
 Author URI: http://spaceninja.com/
 Tags: fixed-width, three-columns, right-sidebar, white, theme-options, threaded-comments
+
+This theme requires at least Wordpress 2.5
 
 TO CUSTOMIZE -------------------------
 Create a new stylesheet in this directory called custom.css, and put your 
@@ -37,6 +39,7 @@ http://wordpress.org/extend/plugins/lastfm-for-wordpress/
 http://wordpress.org/extend/plugins/twitter-for-wordpress/
 
 CHANGELOG -------------------------
+* 5.1.4: Code cleanup and documentation
 * 5.1.3: Added support for new Wordpress 2.8 features like body_class() function, and fixed calendar and rss feed styles.
 * 5.1.2: Added support for new Wordpress 2.7 features like new comment styles and post_class() function.
 * 5.1.1: Removed reference to non-existant favicon.ico.
