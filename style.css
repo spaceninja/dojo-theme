@@ -1,0 +1,555 @@
+/*
+Theme Name: Dojo
+Theme URI: http://spaceninja.com/dojo/
+Description: A minimal, web-standards, SEO-friendly theme with two dynamic sidebars and an editable "about" blurb.
+Version: 5.1.3
+Author: Scott Vandehey
+Author URI: http://spaceninja.com/
+Tags: fixed-width, three-columns, right-sidebar, white, theme-options, threaded-comments
+
+TO CUSTOMIZE -------------------------
+Create a new stylesheet in this directory called custom.css, and put your 
+rules in there. It will automatically be loaded after this stylesheet, so 
+you can override any rules with your own. Same thing for customie6bugs.css 
+and customie7bugs.css.
+
+SUPPORTED PLUGINS --------------------
+* Brian's Latest Comments
+http://meidell.dk/archives/category/wordpress/latest-comments/
+
+* flickrRSS
+http://wordpress.org/extend/plugins/flickr-rss/
+
+* Simple Tags (for related posts function)
+http://wordpress.org/extend/plugins/simple-tags
+
+RECOMMENDED PLUGINS --------------------
+* Widon't by Shaun Inman (prevents widows in headlines)
+http://shauninman.com/archive/2008/08/25/widont_2_1_1
+
+* Del.icio.us for Wordpress by Ricardo Gonzalez
+http://wordpress.org/extend/plugins/delicious-for-wordpress/
+
+* Last.fm for Wordpress by Ricardo Gonzalez
+http://wordpress.org/extend/plugins/lastfm-for-wordpress/
+
+* Twitter for Wordpress by Ricardo Gonzalez
+http://wordpress.org/extend/plugins/twitter-for-wordpress/
+
+CHANGELOG -------------------------
+* 5.1.3: Added support for new Wordpress 2.8 features like body_class() function, and fixed calendar and rss feed styles.
+* 5.1.2: Added support for new Wordpress 2.7 features like new comment styles and post_class() function.
+* 5.1.1: Removed reference to non-existant favicon.ico.
+* 5.1: Added custom styles option and code to display 25 posts on archive pages.
+* 5.0: Initial public release, following four internal iterations.
+
+The CSS, XHTML and design is released under GPL:
+http://www.opensource.org/licenses/gpl-3.0.html
+
+*/
+
+
+
+/* Universal Rules -------------------------------------------------- */
+body {
+	margin: 0;
+	padding: 0;
+	background: #fff;
+	color: #333;
+	/* font sizing in ems, baby. if you want to change anything, just change this.*/
+	font: 80%/1.5 Arial, "Helvetica Neue", Helvetica, sans-serif;
+}
+.ahem, hr { display: none !important; }
+img { border: none; }
+form { margin: 0; }
+.floatleft, .alignleft { float: left; margin: 0 1em 1em 0; }
+.floatright, .alignright { float: right; margin: 0 0 1em 1em; }
+.aligncenter { display: block; margin-left: auto; margin-right: auto; }
+.clearboth { clear: both; }
+
+/* Layout -------------------------------------------------- */
+#page {
+	width: 960px;
+	margin: 0 auto;
+}
+#header {
+}
+#wrapper {
+	padding-top: 20px;
+	float: left;
+	width: 960px;
+	background: transparent url("images/bg-sidebar-five-percent.png") repeat-y top right;
+}
+#sidebar {
+	width: 395px;
+	float: right;
+	margin-bottom: 20px;
+	padding: 0 15px;
+}
+#columncap {
+	margin-bottom: 20px;
+}
+#column1 {
+	width: 190px;
+	float: left;
+}
+#column2 {
+	width: 190px;
+	float: right;
+}
+#content {
+	width: 510px;
+	float: left;
+	margin-bottom: 20px;
+}
+#footer {
+	clear: both;
+}
+
+/* Header -------------------------------------------------- */
+#header {
+	border-bottom: 1px solid #ccc;
+	padding-top: 3em;
+}
+#header #blogname a {
+	border-bottom: 1px solid #eee;
+}
+#blogname {
+	font-family: Calibri, Arial, "Helvetica Neue", Helvetica, sans-serif;
+	font-size: 3em;
+	line-height: 1;
+	margin: 0 0 .25em;
+}
+
+/* Content -------------------------------------------------- */
+.entry {
+	margin-bottom: 3em;
+}
+.alert,
+.error {
+	background: #ffc;
+	border: 1px solid #ff0;
+	border-width: 1px 0;
+	margin: 1em 0;
+	padding: 1em;
+}
+code, kbd, tt, pre {
+	font-family: Consolas, "Lucida Console", Monaco, monospace;
+	background: transparent url("images/bg-sidebar-five-percent.png") top right;
+}
+code {
+}
+pre {
+	background: transparent url("images/bg-sidebar-five-percent.png") top right;
+	padding: .5em;
+}
+a, a:link, a:visited {
+	color: #333;
+	text-decoration: none;
+	border-bottom: 1px solid #ccc;
+}
+a:hover, a:focus, a:active {
+	color: #c00;
+	border-bottom-width: 2px;
+}
+sup { /* to prevent gaps in paragraph layouts, we'll switch back to regular v-align and shunt it up with pos:rel */
+	vertical-align: baseline;
+	position: relative;
+	bottom: .33em;
+}
+acronym, abbr, .info {
+	border-bottom: 1px dotted #333;
+	cursor: help;
+}
+h1, h2 ,h3, h4 {
+	font-family: Calibri, Arial, "Helvetica Neue", Helvetica, sans-serif;
+	line-height: 1.25;
+	margin: 0 0 .25em;
+}
+h1 {
+	font-size: 2.5em;
+}
+h1.archive {
+	margin-bottom: .5em;
+}
+h2 {
+	font-size: 2em;
+}
+h3 {
+	font-size: 1.75em;
+}
+h4 {
+	font-size: 1.5em;
+}
+h5, h6 {
+	font-size: 1.25em;
+}
+.title h1 a,
+.title h2 a {
+	border-bottom: 1px solid #eee;
+}
+p, ul, ol, table, .navigation {
+	margin: .25em 0 1em;
+}
+th, td {
+	padding: .5em .66em;
+	line-height: 1.1;
+	vertical-align: top;
+	border-bottom: 1px solid #ddd;
+}
+th {
+	text-align: left;
+	vertical-align: bottom;
+}
+.metadata .byline {
+	margin-bottom: .75em;
+}
+ul, ol {
+	margin-left: 0;
+	padding-left: 0;
+}
+ul ul,
+ol ol {
+	margin: 0;
+}
+li {
+	margin: .25em 0 .25em 1.25em;
+	padding-left: 0;
+}
+ul li {
+	list-style-type: disc;
+}
+ol li {
+	margin-left: 1.5em;
+}
+ul.rss li {
+	list-style: none;
+	margin-left: 0;
+	padding-left: 17px;
+	background: transparent url("images/feed.gif") no-repeat left .25em;
+}
+.wp-caption {
+	margin: .25em auto 1em;
+}
+.entry img,
+.entry object {
+	display: block;
+	background: #fff;
+	padding: 4px;
+	border: 1px solid #eee;
+	border-right: 1px solid #ccc;
+	border-bottom: 1px solid #ccc;
+	margin: .25em auto 1em;
+	max-width: 500px;
+}
+.wp-caption img {
+	margin: 0 auto;
+}
+.wp-caption p.wp-caption-text {
+	font-size: .9em;
+	margin: .25em 0 0;
+	text-align: center;
+	color: #666;
+}
+.entry .thumbrow {
+	text-align: center;
+}
+.entry .thumbrow img {
+	display: inline;
+	margin: 0 .5em;
+}
+.entry .thumbrow a {
+	border: none;
+}
+.entry .floatright img,
+.entry .floatleft img {
+	margin: .25em 0 1em;
+}
+.entry img.floatright,
+.entry img.alignright,
+.entry img[align="right"],
+.wp-caption.alignright {
+	margin: .25em 0 1em 1em;
+}
+.entry img.floatleft,
+.entry img.alignleft,
+.entry img[align="left"],
+.wp-caption.alignleft {
+	margin: .25em 1em 1em 0;
+}
+.entry p,
+.entry li,
+#columncap p {
+	text-align: justify;
+}
+#site-archives-monthly-archive {
+	width: 60%;
+	float: left;
+}
+#site-archives-monthly-archive.wide {
+	width: auto;
+	float: none;
+}
+#site-archives-monthly-archive li,
+#site-links li {
+	text-align: left;
+}
+#site-archives-category-archive {
+	width: 37%;
+	float: right;
+}
+#site-links img {
+	margin-left: 0;
+	margin-right: 0;
+}
+blockquote {
+	margin: .25em 0 1em;
+	padding: .75em 1em .25em;
+	border-left: 2px solid #ccc;
+	background: transparent url("images/bg-sidebar-five-percent.png") top right;
+	font-style: italic;
+}
+blockquote i,
+blockquote em,
+blockquote cite {
+	font-style: normal;
+}
+blockquote p {
+	margin: 0 0 .5em;
+}
+.navigation {
+	border-top: 1px solid #ccc;
+	padding-top: .25em;
+	width: 100%;
+	float: left;
+}
+.navigation .prev {
+	float: left;
+	width: 50%;
+}
+.navigation .next {
+	float: right;
+	width: 50%;
+	text-align: right;
+}
+
+/* Comments -------------------------------------------------- */
+.comments,
+.commentlist,
+.nocomments,
+.related {
+	margin-bottom: 2em;
+}
+.related {
+	clear: both;
+}
+.commentlist cite {
+	font-style: normal;
+}
+.commentlist li {
+	clear: both;
+	margin: 0;
+	padding: .75em 1em .25em;
+	list-style: none;
+	background: #fff;
+}
+.commentlist li li {
+	border-left: 2px solid #ccc;
+	margin: 0 -1em 0 .5em;
+}
+.commentlist .even {
+	background: #eee;
+}
+.commentlist .bypostauthor {
+	background: #ddd;
+}
+.commentlist .avatar {
+	float: right;
+	margin: 0 0 .5em .5em;
+	background: #fff;
+	padding: 4px;
+	border: 1px solid #eee;
+	border-right: 1px solid #ccc;
+	border-bottom: 1px solid #ccc;
+}
+#cancel-comment-reply-link {
+	margin-left: 3em;
+}
+.trackback,
+.pingback {
+	font-size: .85em;
+	color: #666;
+}
+.trackback .content,
+.pingback .content {
+	font-style: italic;
+}
+
+/* Sidebar -------------------------------------------------- */
+#sidebar {
+}
+#sidebar .widget {
+	clear: both;
+	margin-bottom: 1em;
+	padding-bottom: .5em;
+	border-bottom: 1px solid #ddd;
+}
+#sidebar h4 {
+	margin-top: 0;
+}
+#sidebar blockquote {
+	margin: 0;
+}
+#sidebar img {
+	display: block;
+	background: #fff;
+	padding: 4px;
+	border: 1px solid #eee;
+	border-right: 1px solid #ccc;
+	border-bottom: 1px solid #ccc;
+}
+#sidebar .rsswidget img {
+	/* reset to default styles */
+	display: inline;
+	padding: 0;
+	border: 0;
+	margin: 0;
+	/* hide because it's dumb */
+	display: none;
+}
+/* search */
+#searchform {
+	margin: .25em 0 1em;
+}
+#sidebar #search h4 {
+	display: none;
+}
+#sidebar #search input {
+	width: 33%;
+}
+#sidebar #search input#s {
+	width: 60%;
+}
+#sidebar #search br {
+	display: none;
+}
+/* calendar */
+#wp-calendar {
+	background: transparent url("images/bg-sidebar-five-percent.png") top right;
+	width: 100%;
+}
+#wp-calendar #today {
+	font-weight: bold;
+	background: transparent url("images/bg-sidebar-five-percent.png") top right;
+}
+#wp-calendar td,
+#wp-calendar th {
+	text-align: center;
+	padding: .25em 0;
+	color: #999;
+}
+#wp-calendar td a {
+	font-weight: bold;
+}
+#wp-calendar caption {
+	text-align: left;
+	font-weight: bold;
+}
+/* tag cloud */
+.st-tag-cloud,
+.wp-tag-cloud {
+	background: transparent url("images/bg-sidebar-five-percent.png") top right;
+	padding: .5em .5em .5em 1em;
+}
+#sidebar .st-tag-cloud,
+#sidebar .wp-tag-cloud {
+	background: transparent url("images/bg-sidebar-five-percent.png") top right;
+}
+.st-tag-cloud li,
+.wp-tag-cloud li {
+	display: inline;
+	margin: 0 .5em 0 0;
+}
+.st-tag-cloud li a,
+.wp-tag-cloud li a {
+	color: #555;
+}
+.st-tag-cloud li a:hover,
+.wp-tag-cloud li a:hover,
+.st-tag-cloud li a:focus,
+.wp-tag-cloud li a:focus {
+	color: #c00;
+}
+/* subscribe */
+#subscribe-dojo p {
+	margin: .25em 0;
+}
+/* flickr */
+#flickrrss,
+#flickr-rss-dojo-version {
+	float: left;
+	width: 100%;
+}
+#flickrrss ul,
+#flickrrss li,
+#flickr-rss-dojo-version ul,
+#flickr-rss-dojo-version li {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+#flickrrss li img,
+#flickr-rss-dojo-version li img {
+	float: left;
+	margin: 0 10px 10px 0;
+}
+/* admin recent comments */
+#sidebar blockquote {
+	background: transparent url("images/bg-sidebar-five-percent.png") top right;
+	border-color: #bbb;
+}
+#admin-recent-comments-dojo-version cite {
+	font-style: normal;
+	font-weight: bold;
+}
+#admin-recent-comments-dojo-version blockquote cite {
+	font-style: italic;
+}
+#admin-recent-comments-dojo-version blockquote small {
+	font-size: .9em;
+}
+/* twitter */
+.twitter {
+	margin: 0;
+}
+.twitter .twitter-item {
+	list-style: none;
+	background: transparent url("images/bg-sidebar-five-percent.png") top right;
+	border-left: 2px solid #bbb;
+	font-style: italic;
+	margin: .25em 0 1em;
+	padding: .75em 1em .75em;
+}
+.twitter .twitter-timestamp {
+	display: block;
+	font-size: .8em;
+}
+
+/* Footer -------------------------------------------------- */
+#footer {
+	border-top: 1px solid #ccc;
+	padding-bottom: 1.5em;
+	width: 100%;
+	float: left;
+}
+#footer p {
+	width: 50%;
+	margin: 1em 0 0;
+}
+#footer .copyright {
+	float: left;
+}
+#footer .poweredby {
+	float: right;
+	text-align: right;
+}
