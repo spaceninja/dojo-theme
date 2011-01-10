@@ -33,7 +33,7 @@
 	<h1 class="archive">Archives</h1>
 <?php } ?>
 
-<?php $posts=query_posts($query_string . '&showposts=25'); ?>
+<?php $posts=query_posts($query_string . '&showposts=3'); ?>
 <?php while (have_posts()) : the_post(); ?>
 
 <?

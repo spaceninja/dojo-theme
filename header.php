@@ -1,97 +1,129 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html <?php language_attributes(); ?>>
 <head>
-<meta http-equiv="Content-Type" content="<?php bloginfo('html_type'); ?>; charset=<?php bloginfo('charset'); ?>" />
-<title><?php
-	if ( is_404() ) { echo "404: "; }
-	if ( is_search() ) { echo "Search results for '$s'"; }
-	if ( !is_search() ) { wp_title(''); }
-	if ( is_archive() ) { echo " archive "; }
-	if ( !is_home() ) { echo " - "; }
-	bloginfo('name');
-?></title>
-<?php
-	// Get custom theme options set in the admin area, or use the defaults
-	global $dojomenu_options;
-	foreach ($dojomenu_options as $value) {
-		if (get_option( $value['id'] ) === FALSE) { $$value['id'] = $value['std']; } else { $$value['id'] = get_option( $value['id'] ); }
-	}
-?>
-<link rel="stylesheet" href="<?php bloginfo('stylesheet_url'); ?>" type="text/css" media="screen" />
-<?php if ( $dojo_use_custom_styles == 'true' ) { ?>
-	<link rel="stylesheet" href="<?php bloginfo('template_url'); ?>/custom.css" type="text/css" media="screen" />
-<?php }; ?>
-<link rel="stylesheet" href="<?php bloginfo('template_url'); ?>/print.css" type="text/css" media="print" />
-<!--[if lte IE 6 ]>
-	<link rel="stylesheet" href="<?php bloginfo('template_url'); ?>/ie6bugs.css" type="text/css" media="screen" />
-	<?php if ( $dojo_use_custom_styles == 'true' ) { ?>
-		<link rel="stylesheet" href="<?php bloginfo('template_url'); ?>/customie6bugs.css" type="text/css" media="screen" />
-	<?php }; ?>
-<![endif]-->
-<!--[if IE 7 ]>
-	<link rel="stylesheet" href="<?php bloginfo('template_url'); ?>/ie7bugs.css" type="text/css" media="screen" />
-	<?php if ( $dojo_use_custom_styles == 'true' ) { ?>
-		<link rel="stylesheet" href="<?php bloginfo('template_url'); ?>/customie7bugs.css" type="text/css" media="screen" />
-	<?php }; ?>
-<![endif]-->
-<link rel="alternate" type="application/atom+xml" title="<?php bloginfo('name'); ?> Full Posts" href="<?php bloginfo('atom_url'); ?>" />
-<link rel="alternate" type="application/atom+xml" title="<?php bloginfo('name'); ?> Comments" href="<?php bloginfo('comments_atom_url'); ?>" />
-<?php
-	// add comments feed on single-post pages
-	if (is_single()) {
-		while (have_posts()) : the_post();
-			if ('open' == $post->comment_status) : /* If comments are open */
-?>
-<link rel="alternate" type="application/atom+xml" title="Comments on <?php the_title(); ?>" href="<?php bloginfo('url'); ?>/index.php?feed=atom&amp;p=<?php the_ID(); ?>" />
-<?php
-			endif;
-		endwhile;
-		rewind_posts();
-	// add category feed on category archives
-	} else if (is_category()) {
-		$category = get_the_category(); 
-?>
-<link rel="alternate" type="application/atom+xml" title="Posts in the <?php echo $category[0]->cat_name; ?> category" href="<?php echo get_category_feed_link( $category[0]->cat_ID, 'atom' ); ?>" />
-<?php
-	// add tag feed on tag archives
-	} else if (is_tag()) {
-?>
-<link rel="alternate" type="application/atom+xml" title="Posts tagged with <?php single_tag_title(); ?>" href="<?php echo get_tag_feed_link( get_query_var('tag_id'), 'atom' ); ?>" />
-<?php
-	// add author feed on author pages
-	} else if (is_author()) {
-		if(isset($_GET['author_name'])) :
-		$curauth = get_userdatabylogin($author_name);
-		else :
-		$curauth = get_userdata(intval($author));
-		endif;
-		$authorfeedlink = get_author_feed_link( $curauth->ID, 'atom' );
+	<meta charset="<?php bloginfo( 'charset' ); ?>" />
+	<title><?php
+
+		// Add the page title
+		wp_title( '-', true, 'right' );
+
+		// Add the site name.
+		bloginfo( 'name' );
+
+		// Add the site description for the home/front page.
+		$site_description = get_bloginfo( 'description', 'display' );
+		if ( $site_description && ( is_front_page() ) ) {
+			print " - $site_description";
+		}
+
+		// Add a page number if necessary:
+		global $page, $paged;
+		if ( $paged >= 2 || $page >= 2 ) {
+			print ' - ' . sprintf( __( 'Page %s', 'twentyten' ), max( $paged, $page ) );
+		}
+
+	?></title>
+	<link rel="stylesheet" media="screen" href="<?php bloginfo( 'stylesheet_url' ); ?>" />
+	<link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>" />
+	<link rel="alternate" type="application/atom+xml" title="<?php bloginfo('name'); ?> Full Posts" href="<?php bloginfo('atom_url'); ?>" />
+	<link rel="alternate" type="application/atom+xml" title="<?php bloginfo('name'); ?> Comments" href="<?php bloginfo('comments_atom_url'); ?>" />
+	<?php
+
+		/**
+		 * Add extra feeds on appropriate pages
+		 * 
+		 * get_post_comments_feed_link - added in 2.2
+		 * get_category_feed_link - added in 2.5
+		 * get_tag_feed_link - added in 2.5
+		 * get_author_feed_link - added in 2.5
+		 */
+
+		if (is_single()) {
+			// add comments feed on single-post pages
+			print '<link rel="alternate" type="application/atom+xml" title="Comments on ' . $wp_query->queried_object->post_title . '" href="' . get_post_comments_feed_link( $wp_query->queried_object->ID, 'atom' ) . '" />';
+
+		} elseif (is_category()) {
+			// add category feed on category archives
+			print '<link rel="alternate" type="application/atom+xml" title="Posts in the ' . $wp_query->queried_object->name . ' category" href="' . get_category_feed_link( $wp_query->queried_object->term_id, 'atom' ) . '" />';
+
+		} elseif (is_tag()) {
+			// add tag feed on tag archives
+			print '<link rel="alternate" type="application/atom+xml" title="Posts tagged with ' . $wp_query->queried_object->name . '" href="' . get_tag_feed_link( $wp_query->queried_object->term_id, 'atom' ) . '" />';
+
+		} elseif (is_author()) {
+			// add author feed on author pages
+			print '<link rel="alternate" type="application/atom+xml" title="Posts by ' . $wp_query->queried_object->display_name . '" href="' . get_author_feed_link( $wp_query->queried_object->ID, 'atom' ) . '" />';
+		}
+
+		// threaded comment support added in 2.7
+		// ref: http://codex.wordpress.org/Migrating_Plugins_and_Themes_to_2.7/Enhanced_Comment_Display
+		if ( is_singular() && get_option( 'thread_comments' ) )
+			wp_enqueue_script( 'comment-reply' );
+
+		// required for plugin support
+		wp_head();
+
 	?>
-<link rel="alternate" type="application/atom+xml" title="Posts by <?php echo $curauth->display_name; ?>" href="<?php echo $authorfeedlink; ?>" />
-<?php
-	}
-?>
-<link rel="pingback" href="<?php bloginfo('pingback_url'); ?>" />
-<?php
-	if ( is_singular() ) wp_enqueue_script( 'comment-reply' );
-	wp_head();
-?></head>
-<?php // use the new body_class() function if it's available - added in 2.8 ?>
-<body <?php if(function_exists('body_class')) { body_class(); } ?>>
+</head>
+<body <?php
 
-<div id="page">
+	/**
+	 * To get a dynamic layout, we're adding a new class to body, depending on 
+	 * the number of sidebars that are active. This allows the user to switch 
+	 * between three different layouts just by moving widgets around.
+	 * 
+	 * body_class - added in 2.8
+	 */
 
-<div id="header">
-	<?php if ( is_home() ) { /* use an h1 on the homepage */ ?>
-	<h1 id="blogname"><a href="<?php bloginfo('url'); ?>"><?php bloginfo('name'); ?></a></h1>
-	<?php } else { /* and a p tag everywhere else */ ?>
-	<p id="blogname"><strong><a href="<?php bloginfo('url'); ?>"><?php bloginfo('name'); ?></a></strong></p>
-	<?php } ?>
-	<p id="tagline"><em><?php bloginfo('description'); ?></em></p>
-</div> <!-- end header -->
+	if ( function_exists( 'body_class' ) ) {
+		// TODO: Allow this to handle only sidebar3 being active, for example
+		if ( is_active_sidebar( 'sidebar1' ) && ! is_active_sidebar( 'sidebar2' ) && ! is_active_sidebar( 'sidebar3' ) ) {
+			$sidebar_class = 'one-sidebar';
+		} elseif ( is_active_sidebar( 'sidebar1' ) && is_active_sidebar( 'sidebar2' ) && ! is_active_sidebar( 'sidebar3' ) ) {
+			$sidebar_class = 'two-sidebars';
+		} elseif ( is_active_sidebar( 'sidebar1' ) && is_active_sidebar( 'sidebar2' ) && is_active_sidebar( 'sidebar3' ) ) {
+			$sidebar_class = 'three-sidebars';
+		} else {
+			$sidebar_class = 'one-sidebar';
+		}
+		body_class( $sidebar_class );
+	} ?>>
 
-<hr />
+	<div id="page">
 
-<div id="wrapper">
+		<header id="header" role="banner">
 
-<div id="content">
+			<h1 id="blogname"><a href="<?php print home_url( '/' ); // added in 3.0 ?>" rel="home"><?php bloginfo( 'name' ); ?></a></h1>
+
+			<?php if ( get_bloginfo( 'description' ) ) : ?>
+				<p id="tagline"><em><?php bloginfo( 'description' ); ?></em></p>
+			<?php endif; ?>
+
+			<p id="skip-link"><em><a href="#content"><?php  _e( 'Skip to content', 'dojo' ); ?></a></em> &darr;</p>
+
+			<hr />
+
+			<nav id="navigation" role="navigation">
+				<?php
+
+					/**
+					 * Our navigation menu.  If one isn't filled out, wp_nav_menu 
+					 * falls back to wp_page_menu.  The menu assiged to the primary 
+					 * position is the one used.  If none is assigned, the menu with 
+					 * the lowest ID is used.
+					 * 
+					 * wp_nav_menu - added in 3.0
+					 */
+
+					wp_nav_menu( array( 'theme_location' => 'primary' ) );
+
+				?>
+			</nav> <!-- /#main-menu -->
+
+		</header> <!-- /#header -->
+
+		<hr />
+
+		<div id="main">
+
+			<div id="content">
