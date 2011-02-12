@@ -1,37 +1,25 @@
-<?php get_header(); ?>
+<?php
+/**
+ * The template for displaying all pages.
+ *
+ * This is the template that displays all pages by default.
+ * Please note that this is the WordPress construct of pages
+ * and that other 'pages' on your WordPress site will use a
+ * different template.
+ *
+ * @package WordPress
+ * @subpackage Twenty_Ten
+ * @since Twenty Ten 1.0
+ */
 
-<?php if (have_posts()) : while (have_posts()) : the_post(); ?>
+get_header(); ?>
 
 <?php
-	// use the new post_class() function if it's available - added in 2.7
-	if (function_exists('post_class')) {
+	/* Run the loop to output the page.
+	 * If you want to overload this in a child theme then include a file
+	 * called loop-page.php and that will be used instead.
+	 */
+	get_template_part( 'loop', 'page' );
 ?>
-	<div <?php post_class('entry'); ?> id="post-<?php the_ID(); ?>">
-<?php } else { ?>
-	<div class="entry" id="post-<?php the_ID(); ?>">
-<?php } ?>
-
-<div class="title">
-	<h1><a href="<?php echo get_permalink() ?>"><?php the_title(); ?></a></h1>
-</div>
-
-<div class="content">
-	<?php the_content(); ?>
-	<?php wp_link_pages(array('before' => '<p><strong>Pages:</strong> ', 'after' => '</p>', 'next_or_number' => 'number')); ?>
-</div>
-
-<?php edit_post_link('Edit this page.', '<div class="metadata"><p class="byline"><small>', '</small></p></div>'); ?>
-
-</div><!-- end entry -->
-
-<?php endwhile; else: ?>
-
-<div class="error">
-	<h1>Not Found</h1>
-	<p>Sorry, we couldn't find the page you were looking for. Perhaps you'd like to search for it?</p>
-	<?php include (TEMPLATEPATH . '/searchform.php'); ?>
-</div>
-
-<?php endif; ?>
 
 <?php get_footer(); ?>

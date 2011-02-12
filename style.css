@@ -11,21 +11,57 @@ Tags: fixed-width, three-columns, right-sidebar, white, theme-options, threaded-
 
 TODO =========================================================================
 
-* change header.php to handle various sidebar combinations
-* updated theme-options to use the Settings API standards (footer/sidebar)
+* update theme-options to use the Settings API standards (footer/sidebar)
 * rewrite theme customization instructions
 * rewrite theme description
 
 COMPLETED ====================================================================
 
+Layout:
 * header.php
 * footer.php
 * sidebar.php
 * navigation.php
 
+System:
+ functions.php
+ theme-options.php
+
+Loop Pages:
+ loop.php
+ loop-attachment.php
+ loop-page.php
+ loop-single.php
+
+Archive Pages:
+ archive.php
+ author.php
+ category.php
+ index.php
+ search.php
+ tag.php
+
+Single Pages:
+ attachment.php
+ image.php
+ page.php
+ single.php
+
+Other Pages:
+ 404.php
+ comments.php
+ searchform.php
+
+Templates:
+ template-archives.php
+ template-links.php
+
 REQUIREMENTS -----------------------------------------------------------------
 
-This theme requires at least Wordpress 2.5
+This theme requires at least Wordpress 2.9
+
+Wordpress Function History:
+http://planetozh.com/projects/wordpress-functions-history/table_light.html
 
 TO CUSTOMIZE -----------------------------------------------------------------
 

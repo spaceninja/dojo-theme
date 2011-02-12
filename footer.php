@@ -1,3 +1,8 @@
+<?php
+/**
+ * Footer template
+ */
+?>
 			</div> <!-- /#content -->
 
 			<?php get_sidebar(); ?>

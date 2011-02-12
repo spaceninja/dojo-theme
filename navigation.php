@@ -1,27 +1,39 @@
+<?php
+/**
+ * Navigation template
+ * shared across all templates
+ */
+?>
+
 <?php if (is_single()) : ?>
 
-	<div class="navigation">
-		<?php previous_post_link( '<div class="prev"><small>Previously:</small> %link</div>' ); ?>
-		<?php next_post_link('<div class="next"><small>Next:</small> %link</div>'); ?>
-	</div>
+	<nav class="navigation">
+		<ul>
+			<?php previous_post_link( '<li class="prev"><small>Previously:</small> %link</li>' ); ?>
+			<?php next_post_link('<li class="next"><small>Next:</small> %link</li>'); ?>
+		</ul>
+	</nav>
 
 <?php
+
 	else :
 		$previous = get_next_posts_link('Older Entries');
 		$next = get_previous_posts_link('Newer Entries');
 ?>
 
-	<?php if( $previous || $next ) : ?>
-		<div class="navigation">
-			<?php
-				if ( $previous ) {
-					print '<div class="prev">' . $previous . '</div>';
-				}
-				if ( $next ) {
-					print '<div class="next">' . $next . '</div>';
-				}
-			?>
-		</div>
+	<?php if ( $previous || $next ) : ?>
+		<nav class="navigation">
+			<ul>
+				<?php
+					if ( $previous ) {
+						print '<li class="prev">' . $previous . '</li>';
+					}
+					if ( $next ) {
+						print '<li class="next">' . $next . '</li>';
+					}
+				?>
+			</ul>
+		</nav>
 	<?php endif; ?>
 
 <?php endif; ?>

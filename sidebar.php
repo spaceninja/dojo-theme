@@ -1,4 +1,9 @@
 <?
+/**
+ * Sidebar template
+ * Three dynamic widget areas
+ */
+
 // Get custom theme options set in the admin area, or use the defaults
 global $dojomenu_options;
 foreach ($dojomenu_options as $value) {
@@ -17,7 +22,7 @@ foreach ($dojomenu_options as $value) {
 		 */
 	?>
 
-	<div id="about" class="widget widget_text">
+	<section id="about" class="widget widget_text">
 		<?php
 			// About Blurb
 			// TODO: Make this load from the admin options page
@@ -25,12 +30,12 @@ foreach ($dojomenu_options as $value) {
 		?>
 		<h4><?php echo stripslashes( $dojo_about_blurb_title ); ?></h4>
 		<p><?php echo stripslashes( $dojo_about_blurb ); ?></p>
-	</div><!-- end about -->
+	</section><!-- end about -->
 
-	<div id="search" class="widget widget_search">
+	<section id="search" class="widget widget_search">
 		<h4>Search</h4>
 		<?php get_search_form(); ?>
-	</div><!-- end search -->
+	</section><!-- end search -->
 
 	<?php
 		/**
@@ -40,15 +45,15 @@ foreach ($dojomenu_options as $value) {
 		 * functions.php, which I copied from the WP admin dashboard.
 		 */
 		if ( function_exists( 'blc_latest_comments' ) ) : ?>
-			<div id="bryans-latest-comments" class="widget widget_dojo_blc_latest_comments">
+			<section id="bryans-latest-comments" class="widget widget_dojo_blc_latest_comments">
 				<h4>Recent Comments</h4>
 				<ul><?php blc_latest_comments( '5', '5', true, '<li>', '</li>', false ); ?></ul>
-			</div><!-- end recent-comments -->
+			</section><!-- end recent-comments -->
 		<?php elseif ( function_exists( 'widget_dojo_dashboard_recent_comments' ) ) :
 			$widget_settings = array(
 				'name' => '',
-				'before_widget' => '<div id="recent-comments" class="widget widget_dojo_dashboard_recent_comments">',
-				'after_widget' => '</div><!-- end recent-comments -->',
+				'before_widget' => '<section id="recent-comments" class="widget widget_dojo_dashboard_recent_comments">',
+				'after_widget' => '</section><!-- end recent-comments -->',
 				'before_title' => '<h4>',
 				'after_title' => '</h4>',
 				);
@@ -59,8 +64,8 @@ foreach ($dojomenu_options as $value) {
 		// Subscribe - from functions.php
 		if ( function_exists( 'widget_dojo_subscribe' ) ) {
 			$widget_settings = array(
-				'before_widget' => '<div id="dojo-subscribe" class="widget widget_dojo_subscribe">',
-				'after_widget' => '</div><!-- end subscribe -->',
+				'before_widget' => '<section id="dojo-subscribe" class="widget widget_dojo_subscribe">',
+				'after_widget' => '</section><!-- end subscribe -->',
 				'before_title' => '<h4>',
 				'after_title' => '</h4>',
 			);
@@ -70,8 +75,8 @@ foreach ($dojomenu_options as $value) {
 	<?php
 		// Linkroll
 		$widget_settings = array(
-			'category_before' => '<div id="%id" class="widget widget_links %class">',
-			'category_after' => '</div><!-- end links -->',
+			'category_before' => '<section id="%id" class="widget widget_links %class">',
+			'category_after' => '</section><!-- end links -->',
 			'title_before' => '<h4>',
 			'title_after' => '</h4>',
 		);
@@ -85,7 +90,7 @@ foreach ($dojomenu_options as $value) {
 		$total_posts = $posts_count->publish;
 		$total_comments = $comments_count->approved;
 	?>
-	<div id="meta" class="widget widget_meta">
+	<section id="meta" class="widget widget_meta">
 		<h4>Meta</h4>
 		<ul>
 			<?php wp_register(); ?>
@@ -94,7 +99,7 @@ foreach ($dojomenu_options as $value) {
 			<li><? echo "$total_comments" ?> comments</li>
 			<?php wp_meta(); ?>
 		</ul>
-	</div><!-- end meta -->
+	</section><!-- end meta -->
 
 	<?php endif; // end dynamic sidebar section ?>
 </aside> <!-- /#sidebar1 -->
