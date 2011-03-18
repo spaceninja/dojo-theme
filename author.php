@@ -1,10 +1,7 @@
 <?php
 /**
  * The template for displaying Author Archive pages.
- *
- * @package WordPress
- * @subpackage Twenty_Ten
- * @since Twenty Ten 1.0
+ * Learn more: http://codex.wordpress.org/Template_Hierarchy
  */
 
 get_header(); ?>
@@ -45,7 +42,7 @@ if ( get_the_author_meta( 'description' ) ) : ?>
 	 */
 	rewind_posts();
 
-	/* Run the loop for the author archive page to output the authors posts
+	/* Run the loop for the author archive page to output the author's posts
 	 * If you want to overload this in a child theme then include a file
 	 * called loop-author.php and that will be used instead.
 	 */

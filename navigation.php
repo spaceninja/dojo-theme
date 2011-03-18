@@ -1,7 +1,7 @@
 <?php
 /**
- * Navigation template
- * shared across all templates
+ * Post and Page Navigation
+ * Shared across all templates
  */
 ?>
 

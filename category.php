@@ -1,10 +1,7 @@
 <?php
 /**
  * The template for displaying Category Archive pages.
- *
- * @package WordPress
- * @subpackage Twenty_Ten
- * @since Twenty Ten 1.0
+ * Learn more: http://codex.wordpress.org/Template_Hierarchy
  */
 
 get_header(); ?>
