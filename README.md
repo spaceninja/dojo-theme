@@ -1,4 +1,4 @@
-:warning: **Attention:** This theme for WordPress 3.0 is very old and no longer supported. Use at your own risk!
+:warning: **Attention:** This theme for WordPress 3 is very old and no longer supported. Use at your own risk!
 
 # Dojo WordPress Theme
 
