@@ -12,7 +12,7 @@ Tags: fixed-width, three-columns, right-sidebar, white, theme-options, threaded-
 
 This theme requires at least Wordpress 2.9
 
-### Coming Soon:
+## Coming Soon:
 
 * update theme-options to use the Settings API standards (footer/sidebar)
 * rewrite theme customization instructions
