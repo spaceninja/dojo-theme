@@ -1,22 +1,27 @@
-:warning: **Attention:** This theme is very old and no longer supported. Use at your own risk!
+:warning: **Attention:** This theme for WordPress 3.0 is very old and no longer supported. Use at your own risk!
 
-# Dojo 6.0
+# Dojo WordPress Theme
+
+## Summary:
 
 Dojo is a minimal, web-standards, SEO-friendly WordPress theme with three dynamic sidebars and an editable "about" blurb.
 
-Author: [Scott Vandehey](http://spaceninja.com/)
-
 Tags: fixed-width, three-columns, right-sidebar, white, theme-options, threaded-comments
 
-## Requirements
+## Requirements:
 
 This theme requires at least Wordpress 2.9
+
+### Coming Soon:
+
+* update theme-options to use the Settings API standards (footer/sidebar)
+* rewrite theme customization instructions
+* rewrite theme description
 
 ## Supported Plugins
 * [Brian's Latest Comments](http://meidell.dk/archives/category/wordpress/latest-comments/) — Will be used automatically in default sidebar
 * [Simple Tags](http://wordpress.org/extend/plugins/simple-tags) — Will be used to display related posts on single pages
   
-
 ## Recommended Plugins
 
 * [Widon't](http://shauninman.com/archive/2008/08/25/widont_2_1_1) by Shaun Inman (prevents widows in headlines)
@@ -25,7 +30,15 @@ This theme requires at least Wordpress 2.9
 * [Last.fm for Wordpress](http://wordpress.org/extend/plugins/lastfm-for-wordpress/) by Ricardo Gonzalez
 * [Twitter for Wordpress](http://wordpress.org/extend/plugins/twitter-for-wordpress/) by Ricardo Gonzalez
 
-## Changelog
+## Contributors:
+
+[Scott Vandehey](http://spaceninja.com/)
+
+## License:
+
+[GNU General Public License v3.0](http://www.gnu.org/licenses/gpl-3.0.html)
+
+## Changelog:
 
 * 6.0:   Complete rewrite to support Wordpress 3.0/3.1 features
 * 5.1.4: Code cleanup and documentation
@@ -34,7 +47,3 @@ This theme requires at least Wordpress 2.9
 * 5.1.1: Removed reference to non-existant favicon.ico.
 * 5.1:   Added custom styles option, display 25 posts on archive pages.
 * 5.0:   Initial public release, following four internal iterations.
-
-## License
-
-This theme's CSS, XHTML and design is released under the GPL.
